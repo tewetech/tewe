@@ -81,6 +81,20 @@
             animation-delay: .2s;
             margin-bottom: 20px;
         }
+        
+        /* Styling untuk tautan header */
+        .header-link {
+            text-decoration: none;
+            color: inherit;
+            display: inline-block; /* Agar bisa diatur transform/hover */
+        }
+        
+        /* Efek hover pada tautan header */
+        .header-link:hover h1 {
+            color: var(--accent-1);
+            text-shadow: 0 0 10px rgba(106, 168, 255, 0.7);
+            transform: scale(1.05);
+        }
 
         .site-header h1 {
             font-family: "Rajdhani", sans-serif;
@@ -89,6 +103,7 @@
             color: var(--accent-2);
             text-shadow: 0 0 10px rgba(108, 241, 255, 0.5);
             margin: 0;
+            transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
 
         .site-header p {
@@ -253,7 +268,9 @@
 </head>
 <body>
     <header class="site-header">
-        <h1>Welcome To My Page</h1>
+        <a href="https://tewetech.github.io/home" class="header-link">
+            <h1>Welcome To My Page</h1>
+        </a>
         <p>official website Tri Wantoro | Tewe Tech</p>
     </header>
 
