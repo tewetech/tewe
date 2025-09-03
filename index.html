@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/tewetech/home/refs/heads/main/favicon-rumah.png">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Tri W | Tewe Tech</title>
+    <title>Home Tri W</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
     
@@ -81,20 +80,6 @@
             animation-delay: .2s;
             margin-bottom: 20px;
         }
-        
-        /* Styling untuk tautan header */
-        .header-link {
-            text-decoration: none;
-            color: inherit;
-            display: inline-block; /* Agar bisa diatur transform/hover */
-        }
-        
-        /* Efek hover pada tautan header */
-        .header-link:hover h1 {
-            color: var(--accent-1);
-            text-shadow: 0 0 10px rgba(106, 168, 255, 0.7);
-            transform: scale(1.05);
-        }
 
         .site-header h1 {
             font-family: "Rajdhani", sans-serif;
@@ -103,7 +88,6 @@
             color: var(--accent-2);
             text-shadow: 0 0 10px rgba(108, 241, 255, 0.5);
             margin: 0;
-            transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
 
         .site-header p {
@@ -159,33 +143,16 @@
             justify-content: center;
             align-items: center;
             min-height: 120px;
-            /* Tambahan untuk efek hover */
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
-        }
-
-        /* Efek hover untuk kartu */
-        .container:hover {
-            /* Mengangkat kartu sedikit ke atas */
-            transform: translateY(-8px) rotate(1deg) scale(1.02);
-            /* Memperbesar bayangan */
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-            /* Mengubah warna border */
-            border-color: rgba(108, 241, 255, 0.5);
         }
         
-        /* Mengatur tautan card sebagai block untuk memenuhi seluruh area container */
+        /* Styling untuk tautan kartu */
         .card-link {
             text-decoration: none;
-            color: inherit; /* Menggunakan warna teks dari parent */
-            display: block; /* Menjadikan tautan sebagai elemen blok */
-            height: 100%;
-            width: 100%;
-            padding: var(--spacing); /* Menambahkan padding agar bisa di klik di seluruh area */
-            margin: -16px; /* Mengurangi margin agar padding pas dengan container */
-            display: flex; /* Menggunakan flexbox untuk penataan konten di dalam tautan */
+            color: var(--accent-2);
+            display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            transition: color 0.2s ease-in-out;
         }
 
         /* Efek hover pada tautan */
@@ -268,9 +235,7 @@
 </head>
 <body>
     <header class="site-header">
-        <a href="https://tewetech.github.io/home" class="header-link">
-            <h1>Welcome To My Page</h1>
-        </a>
+        <h1>Welcome To My Page</h1>
         <p>official website Tri Wantoro | Tewe Tech</p>
     </header>
 
@@ -279,60 +244,70 @@
             <a href="https://tewetech.github.io/wedding-of-chusnul-tri/" class="card-link">
                 <i class="fas fa-heart card-icon"></i> 
                 <h2 class="card-title">Wedding-Ku</h2>
-                <p class="card-subtitle">
-                    Project Undangan Wedding Digital dengan berbagai fitur canggih
-                </p>
             </a>
+            <p class="card-subtitle">
+                Project Undangan Wedding Digital dengan berbagai fitur canggih
+            </p>
         </div>
         
         <div class="container">
             <a href="https://tewetech.github.io/prompt" class="card-link">
                 <i class="fas fa-magic card-icon"></i> 
                 <h2 class="card-title">Prompt-Ku</h2>
-                <p class="card-subtitle">
-                    Berisi prompt-prompt andalan untuk berbagai kebutuhan project
-                </p>
             </a>
+            <p class="card-subtitle">
+                Berisi prompt-prompt andalan untuk berbagai kebutuhan project
+            </p>
         </div>
 
         <div class="container">
             <a href="https://tewetech.github.io/quotes/" class="card-link">
                 <i class="fas fa-quote-right card-icon"></i> 
                 <h2 class="card-title">Quotes-Ku</h2>
-                <p class="card-subtitle">
-                    Kumpulan quotes inspirasi untuk motivasi hidup dan percintaan
-                </p>
             </a>
+            <p class="card-subtitle">
+                Kumpulan quotes inspirasi untuk motivasi hidup dan percintaan
+            </p>
+        </div>
+
+        <div class="container">
+            <a href="https://tewetech.github.io/sholat/" class="card-link">
+                <i class="fas fa-mosque card-icon"></i> 
+                <h2 class="card-title">Jadwal Sholat Surakarta</h2>
+            </a>
+            <p class="card-subtitle">
+                Menampilkan jadwal sholat untuk wilayah Surakarta dan sekitarnya.
+            </p>
         </div>
 
         <div class="container">
             <a href="https://tewetech.github.io/livecode/" class="card-link">
                 <i class="fas fa-laptop-code card-icon"></i> 
                 <h2 class="card-title">Livecode-Ku</h2>
-                <p class="card-subtitle">
-                    Belajar dan latihan berbagai bahasa pemrograman secara interaktif
-                </p>
             </a>
+            <p class="card-subtitle">
+                Belajar dan latihan berbagai bahasa pemrograman secara interaktif
+            </p>
         </div>
         
         <div class="container">
             <a href="https://tewetech.github.io/pesanwa/" class="card-link">
                 <i class="fab fa-whatsapp card-icon"></i> 
                 <h2 class="card-title">Pesan WA Wedding-Ku</h2>
-                <p class="card-subtitle">
-                    Otomatis menghasilkan pesan dan link undangan via WhatsApp
-                </p>
             </a>
+            <p class="card-subtitle">
+                Otomatis menghasilkan pesan dan link undangan via WhatsApp
+            </p>
         </div>
 
         <div class="container">
             <a href="https://tewetech.github.io/uji-coba-v1" class="card-link">
                 <i class="fas fa-flask card-icon"></i> 
                 <h2 class="card-title">Uji Coba-Ku</h2>
-                <p class="card-subtitle">
-                    Tempat khusus untuk melakukan uji coba dan eksperimen project
-                </p>
             </a>
+            <p class="card-subtitle">
+                Tempat khusus untuk melakukan uji coba dan eksperimen project
+            </p>
         </div>
     </div>
 
