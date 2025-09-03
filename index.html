@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portofolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        /* Variabel CSS untuk warna, ukuran, dll. */
+        :root {
+            --dark-blue: #050a16;
+            --main-bg: #0b1630;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-br: 16px;
+            --text-color: #e0e6f3;
+            --subtle-text: rgba(224, 230, 243, 0.7);
+            --accent-1: #6aa8ff;
+            --accent-2: #6cf1ff;
+            --spacing: 16px;
+        }
+
+        /* Styling untuk body (latar belakang) */
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; /* Mengatur tata letak vertikal */
+            align-items: center;
+            justify-content: space-between; /* Menempatkan header, konten, dan footer di setiap ujung */
+            color: var(--text-color);
+            font-family: "Roboto Mono", monospace;
+            position: relative;
+            overflow-x: hidden; /* Mencegah scroll horizontal */
+            /* Gradient latar belakang */
+            background: linear-gradient(180deg, #081226 0%, #0a1530 50%, #071023 100%);
+        }
+
+        /* Elemen pseudo untuk efek latar belakang */
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Latar belakang dengan gradien radial dan efek blur */
+        body::before {
+            background: radial-gradient(circle 800px at 15% 15%, #0b1630 0%, #0b1630 40%, transparent 60%) no-repeat,
+                        radial-gradient(circle 600px at 85% 20%, #0a1f4a 0%, transparent 60%) no-repeat,
+                        radial-gradient(circle 700px at 40% 85%, #102e5e 0%, transparent 60%) no-repeat;
+            opacity: 0.8;
+            filter: blur(20px);
+            animation: pulseBg 15s infinite ease-in-out alternate;
+        }
+
+        /* Latar belakang dengan garis-garis berulang */
+        body::after {
+            background: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 24px),
+                        repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 24px);
+            mask-image: radial-gradient(1200px 700px at 50% 40%, #000 0%, transparent 75%);
+        }
+        
+        /* Header */
+        .site-header {
+            text-align: center;
+            padding: 30px var(--spacing) 10px;
+            animation: fadeIn .7s ease-out both;
+            animation-delay: .2s;
+            margin-bottom: 20px;
+        }
+
+        .site-header h1 {
+            font-family: "Rajdhani", sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--accent-2);
+            text-shadow: 0 0 10px rgba(108, 241, 255, 0.5);
+            margin: 0;
+        }
+
+        .site-header p {
+            font-family: "Roboto Mono", monospace;
+            font-size: 0.8rem;
+            color: var(--subtle-text);
+            margin: 5px 0 0 0;
+        }
+
+        /* Footer */
+        .site-footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--subtle-text);
+            padding: 20px var(--spacing);
+            margin-top: auto;
+            animation: fadeIn .7s ease-out both;
+            animation-delay: .4s;
+        }
+        
+        /* Container untuk membungkus semua kartu */
+        .cards-wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+            gap: var(--spacing);
+            justify-content: center;
+            align-items: center;
+            padding: var(--spacing);
+            max-width: 1200px;
+            width: 90vw;
+            flex-grow: 1; /* Agar konten mengambil sisa ruang */
+        }
+
+        /* Container utama (kartu) */
+        .container {
+            position: relative;
+            z-index: 2;
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px) saturate(120%);
+            -webkit-backdrop-filter: blur(14px) saturate(120%);
+            border-radius: var(--glass-br);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+            padding: var(--spacing);
+            animation: fadeIn .7s ease-out both;
+            text-align: center;
+            display: flex; /* Untuk menata ikon dan teks secara vertikal */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 120px; /* Tinggi minimum agar konten tidak terlalu rapat */
+        }
+        
+        /* Styling untuk judul kartu yang bisa diklik */
+        .card-title {
+            font-family: "Rajdhani", sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent-2);
+            text-shadow: 0 0 8px rgba(108, 241, 255, 0.3);
+            margin: 5px 0 5px 0; /* Sesuaikan margin untuk ikon */
+            cursor: pointer;
+            transition: color 0.2s ease-in-out;
+        }
+        
+        /* Styling untuk tautan */
+        .card-link {
+            text-decoration: none; /* Menghilangkan garis bawah pada tautan */
+            color: var(--accent-2);
+            display: flex; /* Untuk menata ikon dan judul sejajar */
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-link:hover .card-title,
+        .card-link:hover .card-icon { /* Tambahkan efek hover ke ikon juga */
+            color: var(--accent-1); /* Mengubah warna judul dan ikon saat di hover */
+        }
+
+        /* Styling untuk ikon */
+        .card-icon {
+            font-size: 2.5rem; /* Ukuran ikon */
+            color: var(--accent-2); /* Warna ikon sama dengan judul */
+            margin-bottom: 10px; /* Jarak antara ikon dan judul */
+            transition: color 0.2s ease-in-out;
+            text-shadow: 0 0 8px rgba(108, 241, 255, 0.3);
+        }
+
+        /* Styling untuk keterangan kecil */
+        .card-subtitle {
+            font-family: "Roboto Mono", monospace;
+            font-size: 0.7rem;
+            color: var(--subtle-text);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseBg {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1>Welcome To My Page</h1>
+        <p>official website Tri Wantoro | Tewe Tech</p>
+    </header>
+
+    <div class="cards-wrapper">
+        <div class="container">
+            <a href="https://tewetech.github.io/wedding-of-chusnul-tri/" class="card-link">
+                <i class="fas fa-heart card-icon"></i> 
+                <h2 class="card-title">Wedding-Ku</h2>
+            </a>
+            <p class="card-subtitle">
+                Project Undangan Wedding Digital dengan berbagai fitur canggih
+            </p>
+        </div>
+        
+        <div class="container">
+            <a href="https://tewetech.github.io/prompt" class="card-link">
+                <i class="fas fa-magic card-icon"></i> 
+                <h2 class="card-title">Prompt-Ku</h2>
+            </a>
+            <p class="card-subtitle">
+                Berisi prompt-prompt andalan untuk berbagai kebutuhan project
+            </p>
+        </div>
+
+        <div class="container">
+            <a href="https://tewetech.github.io/quotes/" class="card-link">
+                <i class="fas fa-quote-right card-icon"></i> 
+                <h2 class="card-title">Quotes-Ku</h2>
+            </a>
+            <p class="card-subtitle">
+                Kumpulan quotes inspirasi untuk motivasi hidup dan percintaan
+            </p>
+        </div>
+
+        <div class="container">
+            <a href="https://tewetech.github.io/livecode/" class="card-link">
+                <i class="fas fa-laptop-code card-icon"></i> 
+                <h2 class="card-title">Livecode-Ku</h2>
+            </a>
+            <p class="card-subtitle">
+                Belajar dan latihan berbagai bahasa pemrograman secara interaktif
+            </p>
+        </div>
+        
+        <div class="container">
+            <a href="https://tewetech.github.io/pesanwa/" class="card-link">
+                <i class="fab fa-whatsapp card-icon"></i> 
+                <h2 class="card-title">Pesan WA Wedding-Ku</h2>
+            </a>
+            <p class="card-subtitle">
+                Otomatis menghasilkan pesan dan link undangan via WhatsApp
+            </p>
+        </div>
+
+        <div class="container">
+            <a href="https://tewetech.github.io/uji-coba-v1" class="card-link">
+                <i class="fas fa-flask card-icon"></i> 
+                <h2 class="card-title">Uji Coba-Ku</h2>
+            </a>
+            <p class="card-subtitle">
+                Tempat khusus untuk melakukan uji coba dan eksperimen project
+            </p>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p id="copyright">copyright 2025 Tewe Tech | Tri Wantoro</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentYear = new Date().getFullYear();
+            const copyrightElement = document.getElementById("copyright");
+            copyrightElement.textContent = `Copyright © ${currentYear} | Tewe Tech | Tri Wantoro`;
+        });
+    </script>
+</body>
+</html>
