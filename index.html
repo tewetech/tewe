@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/tewetech/home/refs/heads/main/favicon-rumah.png">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Tri W | Tewe Tech</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/tewetech/home/refs/heads/main/favicon-rumah.png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
@@ -15,17 +15,19 @@
         /* VARIABEL DAN DASAR                   */
         /* ==================================== */
         
-        /* Variabel CSS untuk kemudahan kustomisasi */
+        /* Variabel CSS untuk palet warna yang lebih fresh dan konsisten dengan tema terang */
         :root {
-            --dark-blue: #050a16;
-            --main-bg: #0b1630;
-            --glass-bg: rgba(255, 255, 255, 0.08);
-            --glass-br: 16px;
-            --text-color: #e0e6f3;
-            --subtle-text: rgba(224, 230, 243, 0.7);
-            --accent-1: #6aa8ff;
-            --accent-2: #6cf1ff;
-            --spacing: 16px;
+            --bg-primary: #f0f0f5; /* Latar belakang utama yang terang */
+            --bg-card: rgba(255, 255, 255, 0.6); /* Latar belakang kartu transparan */
+            --text-main: #333333; /* Warna teks utama yang gelap */
+            --text-subtle: #666666; /* Warna teks sekunder/samar */
+            --accent-1: #08978b; /* Warna aksen utama (biru) */
+            --accent-2: #ff6932; /* Warna aksen kedua (oranye) */
+            --border-color: rgba(0, 0, 0, 0.1); /* Warna border elemen yang gelap */
+            --glass-br: 12px; /* Radius border untuk efek kaca */
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-heavy: rgba(0, 0, 0, 0.2);
+            --sidebar-width: 250px; /* Lebar sidebar */
         }
 
         /* Styling dasar untuk body */
@@ -33,40 +35,45 @@
             margin: 0;
             min-height: 100vh;
             display: flex;
-            flex-direction: column; /* Tata letak vertikal */
+            flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            color: var(--text-color);
-            font-family: "Roboto Mono", monospace;
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif; /* Mengubah font utama */
+            background-color: var(--bg-primary);
             position: relative;
-            overflow-x: hidden; /* Mencegah scroll horizontal */
-            background: linear-gradient(180deg, #081226 0%, #0a1530 50%, #071023 100%);
+            overflow-x: hidden;
         }
 
-        /* Efek latar belakang dengan pseudo-element */
-        body::before, body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* Gradien radial untuk efek visual */
+        /* Latar belakang dengan gradasi dan noise untuk tema terang */
         body::before {
-            background: radial-gradient(circle 800px at 15% 15%, #0b1630 0%, #0b1630 40%, transparent 60%) no-repeat,
-                        radial-gradient(circle 600px at 85% 20%, #0a1f4a 0%, transparent 60%) no-repeat,
-                        radial-gradient(circle 700px at 40% 85%, #102e5e 0%, transparent 60%) no-repeat;
-            opacity: 0.8;
-            filter: blur(20px);
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle 800px at 15% 15%, #e0e0e5 0%, #f0f0f5 40%, transparent 60%) no-repeat,
+                        radial-gradient(circle 600px at 85% 20%, #d0d0d5 0%, transparent 60%) no-repeat,
+                        radial-gradient(circle 700px at 40% 85%, #c0c0c5 0%, transparent 60%) no-repeat;
+            opacity: 0.5;
+            z-index: -2;
             animation: pulseBg 15s infinite ease-in-out alternate;
         }
 
-        /* Garis-garis latar belakang */
+        /* Efek garis-garis halus di latar belakang */
         body::after {
-            background: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 24px),
-                        repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 24px);
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(to right, var(--border-color) 0 1px, transparent 1px 24px),
+                        repeating-linear-gradient(to bottom, var(--border-color) 0 1px, transparent 1px 24px);
+            z-index: -1;
             mask-image: radial-gradient(1200px 700px at 50% 40%, #000 0%, transparent 75%);
+            opacity: 0.5;
         }
 
         /* ==================================== */
@@ -76,175 +83,398 @@
         /* Header situs */
         .site-header {
             text-align: center;
-            padding: 30px var(--spacing) 10px;
-            animation: fadeIn .7s ease-out both;
+            padding: 40px 20px 20px;
+            animation: fadeIn .8s ease-out both;
             animation-delay: .2s;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         
-        /* Styling untuk tautan header */
+        /* Tautan pada header */
         .header-link {
             text-decoration: none;
             color: inherit;
-            display: inline-block; /* Agar bisa diatur transform/hover */
+            display: inline-block;
         }
         
-        /* Efek hover pada tautan header */
+        /* Efek hover pada judul header */
         .header-link:hover h1 {
-            color: var(--accent-1);
-            text-shadow: 0 0 10px rgba(106, 168, 255, 0.7);
-            transform: scale(1.05);
+            color: var(--accent-2);
+            text-shadow: 0 0 15px rgba(255, 127, 80, 0.7);
+            transform: translateY(-2px);
         }
 
         .site-header h1 {
-            font-family: "Rajdhani", sans-serif;
-            font-size: 2.2rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--accent-2);
-            text-shadow: 0 0 10px rgba(108, 241, 255, 0.5);
+            color: var(--accent-1);
+            text-shadow: 0 0 15px rgba(74, 144, 226, 0.5);
             margin: 0;
-            transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+            transition: color 0.4s ease-in-out, text-shadow 0.4s ease-in-out, transform 0.4s ease-in-out;
         }
 
         .site-header p {
-            font-family: "Roboto Mono", monospace;
-            font-size: 0.8rem;
-            color: var(--subtle-text);
-            margin: 5px 0 0 0;
+            font-family: 'JetBrains Mono', monospace; /* Mengubah font sekunder */
+            font-size: 0.9rem;
+            color: var(--text-subtle);
+            margin: 10px 0 0 0;
         }
 
         /* Footer situs */
         .site-footer {
             text-align: center;
-            font-size: 0.7rem;
-            color: var(--subtle-text);
-            padding: 20px var(--spacing);
+            font-size: 0.8rem;
+            color: var(--text-subtle);
+            padding: 30px 20px;
             margin-top: auto;
-            animation: fadeIn .7s ease-out both;
+            animation: fadeIn .8s ease-out both;
             animation-delay: .4s;
         }
 
         /* ==================================== */
-        /* KARTU PROYEK                         */
+        /* KARTU PROYEK (REVISI)                */
         /* ==================================== */
         
-        /* Wrapper untuk semua kartu */
+        /* Wrapper untuk semua kartu, menggunakan Grid untuk tata letak */
         .cards-wrapper {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Default 3 kolom untuk desktop */
-            gap: var(--spacing);
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px; /* Jarak antar kartu */
             justify-content: center;
-            align-items: center;
-            padding: var(--spacing);
+            align-items: stretch; /* MEMASTIKAN SEMUA KARTU MEMILIKI TINGGI SAMA */
+            padding: 24px;
             max-width: 1200px;
             width: 90vw;
             flex-grow: 1;
         }
 
-        /* Container utama (kartu) */
+        /* Container utama (kartu) dengan efek "glassmorphism" */
         .container {
             position: relative;
             z-index: 2;
-            background: var(--glass-bg);
-            backdrop-filter: blur(14px) saturate(120%);
-            -webkit-backdrop-filter: blur(14px) saturate(120%);
+            /* Efek glassmorphism */
+            background: var(--bg-card);
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
             border-radius: var(--glass-br);
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.18);
-            padding: var(--spacing);
-            animation: fadeIn .7s ease-out both;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 20px var(--shadow-light), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            padding: 24px;
+            animation: fadeIn .8s ease-out both;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 120px;
-            /* Tambahan untuk efek hover */
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+            min-height: 150px; /* MENETAPKAN TINGGI MINIMUM UNTUK KONSISTENSI */
+            /* Transisi untuk efek hover */
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease;
         }
 
         /* Efek hover untuk kartu */
         .container:hover {
-            /* Mengangkat kartu sedikit ke atas */
-            transform: translateY(-8px) rotate(1deg) scale(1.02);
-            /* Memperbesar bayangan */
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-            /* Mengubah warna border */
-            border-color: rgba(108, 241, 255, 0.5);
+            transform: translateY(-10px) rotate(-1deg) scale(1.02);
+            box-shadow: 0 15px 30px var(--shadow-heavy), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            border-color: var(--accent-1);
         }
         
-        /* Mengatur tautan card sebagai block untuk memenuhi seluruh area container */
+        /* Mengatur tautan card agar memenuhi seluruh area container */
         .card-link {
             text-decoration: none;
-            color: inherit; /* Menggunakan warna teks dari parent */
-            display: block; /* Menjadikan tautan sebagai elemen blok */
+            color: inherit;
+            display: block;
             height: 100%;
             width: 100%;
-            padding: var(--spacing); /* Menambahkan padding agar bisa di klik di seluruh area */
-            margin: -16px; /* Mengurangi margin agar padding pas dengan container */
-            display: flex; /* Menggunakan flexbox untuk penataan konten di dalam tautan */
+            padding: 0;
+            margin: 0;
+            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        /* Efek hover pada tautan */
-        .card-link:hover .card-title,
-        .card-link:hover .card-icon {
-            color: var(--accent-1);
+        /* Efek hover pada ikon dan judul di dalam kartu */
+        .container:hover .card-title,
+        .container:hover .card-icon {
+            color: var(--accent-2);
         }
 
         /* Styling judul kartu */
         .card-title {
-            font-family: "Rajdhani", sans-serif;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--accent-2);
-            text-shadow: 0 0 8px rgba(108, 241, 255, 0.3);
-            margin: 5px 0 5px 0;
-            cursor: pointer;
-            transition: color 0.2s ease-in-out;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: var(--text-main);
+            text-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+            /* Menyesuaikan margin bawah agar seimbang dengan elemen lain */
+            margin: 10px 0 10px;
+            transition: color 0.3s ease-in-out;
         }
         
         /* Styling ikon kartu */
         .card-icon {
-            font-size: 2.5rem;
-            color: var(--accent-2);
-            margin-bottom: 10px;
-            transition: color 0.2s ease-in-out;
-            text-shadow: 0 0 8px rgba(108, 241, 255, 0.3);
+            font-size: 2.8rem;
+            color: var(--accent-1);
+            margin-bottom: 15px;
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+            text-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
         }
 
         /* Keterangan kecil di bawah judul */
         .card-subtitle {
-            font-family: "Roboto Mono", monospace;
-            font-size: 0.7rem;
-            color: var(--subtle-text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-subtle);
+            /* Memberikan jarak atas yang seimbang */
+            margin: 10px 0 0 0;
+            line-height: 1.5;
+        }
+        
+        /* Gaya untuk tautan URL yang berfungsi sebagai tombol */
+        .card-link-sub {
+            text-decoration: none;
+            display: inline-block; /* Agar padding dan border berfungsi */
+            background-color: transparent;
+            color: var(--text-subtle);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            /* Menghapus margin-top, agar jarak diatur oleh elemen lain */
             margin: 0;
-            line-height: 1.4;
+            border-radius: 20px; /* Membuat sudut membulat */
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Efek hover untuk tautan URL */
+        .card-link-sub:hover {
+            background-color: var(--accent-1);
+            color: #fff;
+            border-color: var(--accent-1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            /* Hapus efek zoom */
+        }
+        
+        /* ==================================== */
+        /* SIDEBAR SWIPE BARU                   */
+        /* ==================================== */
+
+        /* Tombol untuk membuka dan menutup sidebar */
+        .toggle-sidebar-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-1);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--shadow-heavy);
+            z-index: 10;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .toggle-sidebar-btn:hover {
+            transform: scale(1.1);
+            background-color: var(--accent-2);
+        }
+
+        /* Wrapper utama sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: var(--sidebar-width);
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+            z-index: 9;
+            transform: translateX(100%); /* Posisi awal: tersembunyi di luar layar */
+            opacity: 0; /* Opasitas awal: tersembunyi */
+            visibility: hidden; /* Sembunyikan elemen */
+            transition: transform 0.5s cubic-bezier(0.65, 0.05, 0.36, 1), opacity 0.5s ease, visibility 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto; /* Memungkinkan konten di dalam sidebar bisa di-scroll */
+        }
+
+        /* Kelas aktif untuk menampilkan sidebar */
+        .sidebar.active {
+            transform: translateX(0); /* Posisi aktif: tampil di layar */
+            opacity: 1; /* Opasitas aktif: terlihat */
+            visibility: visible; /* Tampilkan elemen */
+        }
+        
+        /* Konten menu utama */
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 50px; /* Menurunkan posisi menu utama */
+        }
+
+        /* Garis melintang di atas menu */
+        .sidebar-separator {
+            width: 80%; /* Lebar garis */
+            height: 2px; /* Tinggi garis */
+            background-color: var(--accent-1); /* Warna garis */
+            border-radius: 2px;
+            opacity: 0.7;
+            margin: 20px auto 0; /* Posisi di tengah, di atas menu */
+        }
+
+        /* Styling tautan di sidebar */
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .sidebar-item:hover {
+            background-color: var(--accent-1);
+            color: #fff;
+            transform: translateX(5px);
+        }
+        
+        /* Styling ikon di sidebar */
+        .sidebar-item i {
+            font-size: 1.5rem;
+            color: var(--accent-1);
+            transition: color 0.3s ease;
+        }
+
+        .sidebar-item:hover i {
+            color: #fff;
+        }
+
+        /* Konten yang akan muncul di sidebar */
+        .sidebar-content {
+            display: none; /* Default: Sembunyikan semua konten */
+            flex-direction: column;
+            gap: 10px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            margin-top: 10px;
+        }
+
+        /* Tampilkan konten yang memiliki kelas aktif */
+        .sidebar-content.active {
+            display: flex;
+        }
+
+        .sidebar-content p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-subtle);
+        }
+
+        .sidebar-content h3 {
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        /* Styling untuk daftar media sosial di sidebar */
+        .social-media-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .social-media-list li a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .social-media-list li a:hover {
+            color: var(--accent-1);
+            transform: translateX(5px);
+        }
+
+        .social-media-list li a i {
+            font-size: 1.5rem;
+            color: var(--accent-1);
+        }
+
+        /* Mengubah ikon chevron menjadi panah rotasi */
+        .chevron {
+            transition: transform 0.3s ease;
+        }
+        .chevron.rotated {
+            transform: rotate(180deg);
+        }
+
+        /* Overlay gelap saat sidebar aktif */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 8;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
         /* ==================================== */
         /* RESPONSIVITAS                        */
         /* ==================================== */
 
-        /* Media Queries untuk perangkat dengan lebar kurang dari 768px (tablet dan mobile) */
-        @media (max-width: 768px) {
+        /* Media Queries untuk perangkat dengan lebar kurang dari 900px */
+        @media (max-width: 900px) {
             .cards-wrapper {
-                grid-template-columns: 1fr; /* Mengubah menjadi 1 kolom */
-                width: 85vw; /* Lebar sedikit disesuaikan */
-                max-width: 450px; /* Batasan lebar untuk mobile */
-            }
-
-            .site-header h1 {
-                font-size: 1.8rem; /* Ukuran font header diperkecil */
+                grid-template-columns: repeat(auto-fit, minmax(300px, 2fr)); /* MENGATUR KARTU SECARA RESPONSIF BERDASARKAN LEBAR LAYAR */
+                align-items: stretch; /* MEMASTIKAN TINGGI KARTU TETAP SAMA */
+                width: 90vw;
             }
         }
         
-        /* Media Queries untuk perangkat dengan lebar 410px hingga 900px */
-        @media (min-width: 410px) and (max-width: 900px) {
+        /* Media Queries untuk perangkat dengan lebar kurang dari 500px (ponsel) */
+        @media (max-width: 500px) {
             .cards-wrapper {
-                grid-template-columns: repeat(2, 1fr); /* Mengubah menjadi 2 kolom untuk tablet atau ponsel besar */
+                grid-template-columns: 1fr; /* MENGUBAH TAMPILAN MENJADI 1 KOLOM */
+                width: 100%;
+                padding: 12px;
+            }
+            .site-header h1 {
+                font-size: 2rem;
+            }
+            /* Sesuaikan sidebar untuk layar yang lebih kecil */
+            :root {
+                --sidebar-width: 200px; /* Lebar sidebar lebih kecil */
             }
         }
 
@@ -254,21 +484,93 @@
 
         /* Animasi fade-in */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         /* Animasi pulse pada latar belakang */
         @keyframes pulseBg {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
             100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
+    
+    <button class="toggle-sidebar-btn" id="toggleSidebarBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-separator"></div>
+
+        <div class="sidebar-menu">
+            <a href="#" class="sidebar-item" id="aboutLink">
+                <i class="fas fa-user-circle"></i>
+                About
+            </a>
+            
+            <a href="https://wa.me/6282323624177" class="sidebar-item" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+                Whatsapp
+            </a>
+
+            <a href="#" class="sidebar-item" id="socialMediaLink">
+                <i class="fas fa-share-alt"></i>
+                Social Media
+            </a>
+        </div>
+
+        <div class="sidebar-content" id="aboutContent">
+            <h3>Tentang Saya</h3>
+            <p>
+                Saya adalah Tri Wantoro, seorang pengembang web dengan fokus pada teknologi front-end. Saya senang mengubah ide kreatif menjadi aplikasi web yang fungsional dan menarik.
+            </p>
+            <p>
+                Saya terus belajar dan mengeksplorasi teknologi baru untuk menghasilkan solusi yang efisien dan ramah pengguna.
+            </p>
+
+            <p>
+                 
+            </p>
+        </div>
+
+        <div class="sidebar-content" id="socialMediaContent">
+            <h3>Ikuti Saya</h3>
+            <ul class="social-media-list">
+                <li>
+                    <a href="https://www.instagram.com/tewe.ai" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        Instagram
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.tiktok.com/@tewestory" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                        Tiktok
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/tewe.fb" target="_blank">
+                        <i class="fab fa-facebook"></i>
+                        Facebook
+                    </a>
+                </li>
+                <li>
+                    <a href="https://x.com/teweart" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                        X
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <header class="site-header">
-        <a href="https://tewetech.github.io/home" class="header-link">
+        <a href="https://tewe.netlify.app" class="header-link">
             <h1>Welcome To My Page</h1>
         </a>
         <p>official website Tri Wantoro | Tewe Tech</p>
@@ -276,147 +578,238 @@
 	
     <div class="cards-wrapper">
 
-
-
+        <div class="container">
+            <i class="fas fa-calculator card-icon"></i>
+            <h2 class="card-title">Kalkulator</h2>
+            <a href="https://kalkulator-tewe.netlify.app/" class="card-link-sub">
+                kalkulator-tewe.netlify.app
+            </a>
+            <p class="card-subtitle">
+                Kalkulator cepat dengan riwayat hitungan otomatis.
+            </p>
+        </div>    
 
         <div class="container">
-            <a href="https://tewetech.github.io/home/" class="card-link">
-                <i class="fas fa-paste card-icon"></i> 
-                <h2 class="card-title">TAMBAH CARD COPY INI</h2>
-                <p class="card-subtitle">
-                    Baris ke 282 Sampai 290 https://tewetech.github.io/icon  
-                </p>
+            <i class="fas fa-file-invoice-dollar card-icon"></i>
+            <h2 class="card-title">Nota</h2>
+            <a href="https://nota-tewe.netlify.app/" class="card-link-sub">
+                nota-tewe.netlify.app
             </a>
-        </div>
-        
-		
-		
-        <div class="container">
-            <a href="https://tewetech.github.io/pesanwa/" class="card-link">
-                <i class="fab fa-whatsapp card-icon"></i> 
-                <h2 class="card-title">Pesan WA Wedding-Ku</h2>
-                <p class="card-subtitle">
-                    Otomatis menghasilkan pesan dan link undangan via WhatsApp
-                </p>
-            </a>
-        </div>
-
-
+            <p class="card-subtitle">
+                Aplikasi khusus untuk membuat dan mengelola nota.
+            </p>
+        </div>	
 
         <div class="container">
-            <a href="https://tewetech.github.io/wedding-of-chusnul-tri/" class="card-link">
-                <i class="fas fa-heart card-icon"></i> 
-                <h2 class="card-title">Wedding-Ku</h2>
-                <p class="card-subtitle">
-                    Project Undangan Wedding Digital dengan berbagai fitur canggih
-                </p>
+            <i class="fas fa-clock card-icon"></i>
+            <h2 class="card-title">Jam</h2>
+            <a href="https://jam-tewe.netlify.app/" class="card-link-sub">
+                jam-tewe.netlify.app
             </a>
-        </div>
-
-
-
+            <p class="card-subtitle">
+                Jam digital simpel dengan pilihan tema dan tanggal.
+            </p>
+        </div>	
 
         <div class="container">
-            <a href="https://tewetech.github.io/prompt" class="card-link">
-                <i class="fas fa-magic card-icon"></i> 
-                <h2 class="card-title">Prompt-Ku</h2>
-                <p class="card-subtitle">
-                    Berisi prompt-prompt andalan untuk berbagai kebutuhan project
-                </p>
+            <i class="fab fa-google card-icon"></i>
+            <h2 class="card-title">Google Gemini</h2>
+            <a href="https://gemini.google.com/app?hl=id" class="card-link-sub">
+                gemini.google.com
             </a>
-        </div>
-
-
-
-
-
-        <div class="container">
-            <a href="https://tewetech.github.io/livecode/" class="card-link">
-                <i class="fas fa-laptop-code card-icon"></i> 
-                <h2 class="card-title">Livecode-Ku</h2>
-                <p class="card-subtitle">
-                    Belajar dan latihan berbagai bahasa pemrograman secara interaktif
-                </p>
-            </a>
-        </div>
-
-
-
-
-        <div class="container">
-            <a href="https://tewetech.github.io/sholat/" class="card-link">
-                <i class="fas fa-mosque card-icon"></i> 
-                <h2 class="card-title">Jadwal Sholat Surakarta</h2>
-                <p class="card-subtitle">
-                    Jadwal sholat lima waktu untuk wilayah Surakarta dan sekitarnya
-                </p>
-            </a>
-        </div>
-
-
-
-        <div class="container">
-            <a href="https://tewetech.github.io/quotes/" class="card-link">
-                <i class="fas fa-quote-right card-icon"></i> 
-                <h2 class="card-title">Quotes-Ku</h2>
-                <p class="card-subtitle">
-                    Kumpulan quotes inspirasi untuk motivasi hidup dan percintaan
-                </p>
-            </a>
-        </div>
-
-
-
-        <div class="container">
-            <a href="https://tewetech.github.io/nota/" class="card-link">
-                <i class="fas fa-file-invoice-dollar card-icon"></i> 
-                <h2 class="card-title">Invoice & Nota</h2>
-                <p class="card-subtitle">
-                    Aplikasi sederhana untuk membuat invoice dan nota digital
-                </p>
-            </a>
+            <p class="card-subtitle">
+                Website Google Gemini AI.
+            </p>
         </div>
 
         <div class="container">
-            <a href="https://tewetech.github.io/experiment" class="card-link">
-                <i class="fas fa-flask card-icon"></i> 
-                <h2 class="card-title">Experiment-Ku</h2>
-                <p class="card-subtitle">
-                    Tempat khusus untuk melakukan uji coba dan eksperimen project
-                </p>
+            <i class="fas fa-magic card-icon"></i> 
+            <h2 class="card-title">Prompt HTML</h2>
+            <a href="https://prompt-tewe.netlify.app" class="card-link-sub">
+                prompt-tewe.netlify.app
             </a>
+            <p class="card-subtitle">
+                Berisi prompt andalan untuk berbagai proyek.
+            </p>
         </div>
 
         <div class="container">
-            <a href="https://tewetech.github.io/icon/" class="card-link">
-                <i class="fas fa-medal card-icon"></i>
-                <h2 class="card-title">Icon-Ku</h2>
-                <p class="card-subtitle">
-                    Kumpulan icon icon keren by Tewe Tech
-                </p>
+            <i class="fas fa-code card-icon"></i> 
+            <h2 class="card-title">Live Code</h2>
+            <a href="https://vscode.dev/?vscode-lang=id" class="card-link-sub">
+                vscode.dev
             </a>
+            <p class="card-subtitle">
+                Tempat belajar dan latihan pemrograman interaktif.
+            </p>
         </div>
+
+        <div class="container">
+            <i class="fas fa-image card-icon"></i>
+            <h2 class="card-title">Prompt Image Generator</h2>
+            <a href="https://promptgambar-tewe.netlify.app/" class="card-link-sub">
+                promptgambar-tewe.netlify.app
+            </a>
+            <p class="card-subtitle">
+                Kumpulan prompt untuk menghasilkan gambar kreatif.
+            </p>
+        </div>	
+
+
+        <div class="container">
+            <i class="fas fa-paperclip card-icon"></i>
+            <h2 class="card-title">Quotes</h2>
+            <a href="https://quotes-tewe.netlify.app/" class="card-link-sub">
+                quotes-tewe.netlify.app
+            </a>
+            <p class="card-subtitle">
+                Aplikasi untuk membuat dan menyimpan ide kutipan.
+            </p>
+        </div>	
+
+        <div class="container">
+            <i class="fas fa-mosque card-icon"></i> </i>
+            <h2 class="card-title">Jadwal Sholat</h2>
+            <a href="https://tewetech.github.io/sholat/" class="card-link-sub">
+                tewetech.github.io/sholat
+            </a>
+            <p class="card-subtitle">
+                Jadwal sholat lima waktu untuk wilayah Surakarta dan sekitarnya.
+            </p>
+        </div>
+
+
+        <div class="container">
+            <i class="fas fa-medal card-icon"></i>
+            <h2 class="card-title">Icon Website</h2>
+            <a href="https://tewetech.github.io/icon/" class="card-link-sub">
+                tewetech.github.io/icon
+            </a>
+            <p class="card-subtitle">
+                Koleksi ikon keren dari Tewe Tech.
+            </p>
+        </div>
+
+
+
+
     </div>
 
-
-
     <footer class="site-footer">
-        <p id="copyright">copyright 2025 Tewe Tech | Tri Wantoro</p>
+        <p id="copyright"></p>
     </footer>
 
     <script>
-        // Skrip JavaScript untuk memperbarui tahun hak cipta secara dinamis
+        // DOMContentLoaded memastikan script berjalan setelah seluruh dokumen HTML dimuat
         document.addEventListener("DOMContentLoaded", function() {
-            // Mengambil tahun saat ini
-            const currentYear = new Date().getFullYear();
-            // Mendapatkan elemen dengan id 'copyright'
+            // Mengambil elemen dengan id 'copyright'
             const copyrightElement = document.getElementById("copyright");
-            // Mengubah teks di dalamnya
+            // Mengatur teks elemen dengan tahun saat ini secara dinamis
+            const currentYear = new Date().getFullYear();
             copyrightElement.textContent = `Copyright © ${currentYear} | Tewe Tech | Tri Wantoro`;
+
+            // ====================================
+            // LOGIKA SIDEBAR BARU
+            // ====================================
+            const sidebar = document.getElementById('sidebar');
+            const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const aboutLink = document.getElementById('aboutLink');
+            const socialMediaLink = document.getElementById('socialMediaLink');
+            const aboutContent = document.getElementById('aboutContent');
+            const socialMediaContent = document.getElementById('socialMediaContent');
+            const allContentSections = document.querySelectorAll('.sidebar-content');
+
+            // Fungsi untuk membuka dan menutup sidebar
+            function toggleSidebar() {
+                // Periksa apakah sidebar saat ini aktif
+                const isActive = sidebar.classList.contains('active');
+                if (isActive) {
+                    // Jika aktif, tutup sidebar
+                    sidebar.classList.remove('active');
+                    sidebarOverlay.classList.remove('active');
+                    // Ganti ikon menjadi hamburger
+                    toggleSidebarBtn.querySelector('i').classList.remove('fa-times');
+                    toggleSidebarBtn.querySelector('i').classList.add('fa-bars');
+                    // Sembunyikan semua konten sidebar saat ditutup
+                    allContentSections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                } else {
+                    // Jika tidak aktif, buka sidebar
+                    sidebar.classList.add('active');
+                    sidebarOverlay.classList.add('active');
+                    // Ganti ikon menjadi X
+                    toggleSidebarBtn.querySelector('i').classList.remove('fa-bars');
+                    toggleSidebarBtn.querySelector('i').classList.add('fa-times');
+                }
+            }
+
+            // Fungsi untuk menampilkan konten spesifik di sidebar
+            function showSidebarContent(contentElement) {
+                // Sembunyikan semua konten terlebih dahulu
+                allContentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                // Tampilkan konten yang diminta
+                contentElement.classList.add('active');
+            }
+
+            // Event listener untuk tombol toggle
+            toggleSidebarBtn.addEventListener('click', toggleSidebar);
+
+            // Event listener untuk menutup sidebar saat overlay diklik
+            sidebarOverlay.addEventListener('click', toggleSidebar);
+            
+            // Event listener untuk tautan About
+            aboutLink.addEventListener('click', (e) => {
+                e.preventDefault(); // Mencegah default anchor link
+                showSidebarContent(aboutContent);
+            });
+
+            // Event listener untuk tautan Social Media
+            socialMediaLink.addEventListener('click', (e) => {
+                e.preventDefault(); // Mencegah default anchor link
+                showSidebarContent(socialMediaContent);
+            });
+
+            // Logika untuk gestur swipe (mendukung layar sentuh)
+            let touchStartX = 0;
+            let touchEndX = 0;
+            const minSwipeDistance = 50; // Jarak swipe minimum agar dianggap sebagai gestur
+
+            // Event saat sentuhan dimulai
+            document.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            });
+            
+            // Event saat sentuhan bergerak
+            document.addEventListener('touchmove', (e) => {
+                // Mencegah scroll saat swipe horizontal
+                if (sidebar.classList.contains('active')) {
+                    // Hanya mencegah default jika swipe sedang aktif
+                    const touchMoveX = e.touches[0].clientX;
+                    if (Math.abs(touchMoveX - touchStartX) > 10) {
+                        e.preventDefault();
+                    }
+                }
+            });
+
+            // Event saat sentuhan berakhir
+            document.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].clientX;
+                const swipeDistance = touchStartX - touchEndX;
+
+                // Jika sidebar terbuka dan swipe ke kiri
+                if (sidebar.classList.contains('active') && swipeDistance > minSwipeDistance) {
+                    toggleSidebar();
+                }
+                // Jika sidebar tertutup dan swipe ke kanan (dari sisi kanan layar)
+                else if (!sidebar.classList.contains('active') && touchStartX > (window.innerWidth - 50) && swipeDistance < -minSwipeDistance) {
+                    toggleSidebar();
+                }
+            });
         });
     </script>
 </body>
 </html>
-
-
-
