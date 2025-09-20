@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Tri W | Tewe Tech</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/tewetech/home/refs/heads/main/favicon-rumah.png">
-
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
@@ -15,18 +15,18 @@
         /* VARIABEL DAN DASAR                   */
         /* ==================================== */
         
-        /* Variabel CSS untuk palet warna yang lebih fresh dan konsisten dengan tema terang */
+        /* Variabel CSS untuk palet warna, radius, dan bayangan */
         :root {
             --bg-primary: #f0f0f5; /* Latar belakang utama yang terang */
-            --bg-card: rgba(255, 255, 255, 0.6); /* Latar belakang kartu transparan */
+            --bg-card: rgba(255, 255, 255, 0.6); /* Latar belakang kartu transparan dengan efek kaca */
             --text-main: #333333; /* Warna teks utama yang gelap */
             --text-subtle: #666666; /* Warna teks sekunder/samar */
-            --accent-1: #08978b; /* Warna aksen utama (biru) */
-            --accent-2: #ff6932; /* Warna aksen kedua (oranye) */
-            --border-color: rgba(0, 0, 0, 0.1); /* Warna border elemen yang gelap */
+            --accent-1: #08978b; /* Warna aksen utama (biru-kehijauan) */
+            --accent-2: #ff6932; /* Warna aksen kedua (oranye cerah) */
+            --border-color: rgba(0, 0, 0, 0.1); /* Warna border elemen yang samar */
             --glass-br: 12px; /* Radius border untuk efek kaca */
-            --shadow-light: rgba(0, 0, 0, 0.1);
-            --shadow-heavy: rgba(0, 0, 0, 0.2);
+            --shadow-light: rgba(0, 0, 0, 0.1); /* Bayangan ringan */
+            --shadow-heavy: rgba(0, 0, 0, 0.2); /* Bayangan lebih tebal */
             --sidebar-width: 250px; /* Lebar sidebar */
         }
 
@@ -45,7 +45,7 @@
             overflow-x: hidden;
         }
 
-        /* Latar belakang dengan gradasi dan noise untuk tema terang */
+        /* Latar belakang dengan gradasi radial dan efek noise */
         body::before {
             content: '';
             position: fixed;
@@ -84,7 +84,8 @@
         .site-header {
             text-align: center;
             padding: 40px 20px 20px;
-            animation: fadeIn .8s ease-out both;
+            /* Tambahkan kelas 'fade-in-visible' melalui JS saat halaman dimuat */
+            animation: fadeIn .8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
             animation-delay: .2s;
             margin-bottom: 30px;
         }
@@ -127,12 +128,13 @@
             color: var(--text-subtle);
             padding: 30px 20px;
             margin-top: auto;
-            animation: fadeIn .8s ease-out both;
+            /* Tambahkan kelas 'fade-in-visible' melalui JS saat halaman dimuat */
+            animation: fadeIn .8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
             animation-delay: .4s;
         }
 
         /* ==================================== */
-        /* KARTU PROYEK (REVISI)                */
+        /* KARTU PROYEK                         */
         /* ==================================== */
         
         /* Wrapper untuk semua kartu, menggunakan Grid untuk tata letak */
@@ -141,7 +143,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 24px; /* Jarak antar kartu */
             justify-content: center;
-            align-items: stretch; /* MEMASTIKAN SEMUA KARTU MEMILIKI TINGGI SAMA */
+            align-items: stretch; /* Memastikan semua kartu memiliki tinggi sama */
             padding: 24px;
             max-width: 1200px;
             width: 90vw;
@@ -160,17 +162,22 @@
             border: 1px solid var(--border-color);
             box-shadow: 0 8px 20px var(--shadow-light), inset 0 1px 0 rgba(255, 255, 255, 0.08);
             padding: 24px;
-            animation: fadeIn .8s ease-out both;
+            
+            /* Kondisi Awal: Kartu tidak terlihat dan sedikit bergeser ke bawah */
+            opacity: 0;
+            transform: translateY(20px);
+            
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 150px; /* MENETAPKAN TINGGI MINIMUM UNTUK KONSISTENSI */
+            min-height: 150px; /* Menetapkan tinggi minimum untuk konsistensi */
+            
             /* Transisi untuk efek hover */
             transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease;
         }
-
+        
         /* Efek hover untuk kartu */
         .container:hover {
             transform: translateY(-10px) rotate(-1deg) scale(1.02);
@@ -206,7 +213,6 @@
             font-size: 1.3rem;
             color: var(--text-main);
             text-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
-            /* Menyesuaikan margin bawah agar seimbang dengan elemen lain */
             margin: 10px 0 10px;
             transition: color 0.3s ease-in-out;
         }
@@ -225,7 +231,6 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.8rem;
             color: var(--text-subtle);
-            /* Memberikan jarak atas yang seimbang */
             margin: 10px 0 0 0;
             line-height: 1.5;
         }
@@ -233,12 +238,11 @@
         /* Gaya untuk tautan URL yang berfungsi sebagai tombol */
         .card-link-sub {
             text-decoration: none;
-            display: inline-block; /* Agar padding dan border berfungsi */
+            display: inline-block;
             background-color: transparent;
             color: var(--text-subtle);
             border: 1px solid var(--border-color);
             padding: 8px 16px;
-            /* Menghapus margin-top, agar jarak diatur oleh elemen lain */
             margin: 0;
             border-radius: 20px; /* Membuat sudut membulat */
             font-size: 0.8rem;
@@ -253,7 +257,6 @@
             color: #fff;
             border-color: var(--accent-1);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            /* Hapus efek zoom */
         }
         
         /* ==================================== */
@@ -456,8 +459,8 @@
         /* Media Queries untuk perangkat dengan lebar kurang dari 900px */
         @media (max-width: 900px) {
             .cards-wrapper {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 2fr)); /* MENGATUR KARTU SECARA RESPONSIF BERDASARKAN LEBAR LAYAR */
-                align-items: stretch; /* MEMASTIKAN TINGGI KARTU TETAP SAMA */
+                grid-template-columns: repeat(auto-fit, minmax(300px, 2fr)); /* Mengatur kartu secara responsif berdasarkan lebar layar */
+                align-items: stretch; /* Memastikan tinggi kartu tetap sama */
                 width: 90vw;
             }
         }
@@ -465,16 +468,16 @@
         /* Media Queries untuk perangkat dengan lebar kurang dari 500px (ponsel) */
         @media (max-width: 500px) {
             .cards-wrapper {
-                grid-template-columns: 1fr; /* MENGUBAH TAMPILAN MENJADI 1 KOLOM */
+                grid-template-columns: 1fr; /* Mengubah tampilan menjadi 1 kolom */
                 width: 100%;
                 padding: 12px;
             }
             .site-header h1 {
                 font-size: 2rem;
             }
-            /* Sesuaikan sidebar untuk layar yang lebih kecil */
+            /* Sesuaikan lebar sidebar untuk layar yang lebih kecil */
             :root {
-                --sidebar-width: 200px; /* Lebar sidebar lebih kecil */
+                --sidebar-width: 200px; 
             }
         }
 
@@ -482,10 +485,18 @@
         /* ANIMASI                              */
         /* ==================================== */
 
-        /* Animasi fade-in */
+        /* Animasi fadeIn yang akan digunakan saat elemen terlihat */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Kelas yang akan ditambahkan oleh JavaScript saat elemen terlihat */
+        .container.fade-in-visible {
+            opacity: 1;
+            transform: translateY(0);
+            /* Animasi fade-in yang lebih mulus dengan cubic-bezier */
+            animation: fadeIn .8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
         }
 
         /* Animasi pulse pada latar belakang */
@@ -530,10 +541,7 @@
             <p>
                 Saya terus belajar dan mengeksplorasi teknologi baru untuk menghasilkan solusi yang efisien dan ramah pengguna.
             </p>
-
-            <p>
-                 
-            </p>
+            <p></p>
         </div>
 
         <div class="sidebar-content" id="socialMediaContent">
@@ -570,9 +578,7 @@
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <header class="site-header">
-        <a href="https://tewe.netlify.app" class="header-link">
             <h1>Welcome To My Page</h1>
-        </a>
         <p>official website Tri Wantoro | Tewe Tech</p>
     </header>
 	
@@ -655,7 +661,6 @@
             </p>
         </div>	
 
-
         <div class="container">
             <i class="fas fa-paperclip card-icon"></i>
             <h2 class="card-title">Quotes</h2>
@@ -668,7 +673,7 @@
         </div>	
 
         <div class="container">
-            <i class="fas fa-mosque card-icon"></i> </i>
+            <i class="fas fa-mosque card-icon"></i>
             <h2 class="card-title">Jadwal Sholat</h2>
             <a href="https://tewetech.github.io/sholat/" class="card-link-sub">
                 tewetech.github.io/sholat
@@ -677,7 +682,6 @@
                 Jadwal sholat lima waktu untuk wilayah Surakarta dan sekitarnya.
             </p>
         </div>
-
 
         <div class="container">
             <i class="fas fa-medal card-icon"></i>
@@ -690,8 +694,16 @@
             </p>
         </div>
 
-
-
+        <div class="container">
+            <i class="fas fa-tools card-icon"></i>
+            <h2 class="card-title">Remove BG Auto</h2>
+            <a href="https://tewetech.github.io/removebg/" class="card-link-sub">
+                tewetech.github.io/removebg
+            </a>
+            <p class="card-subtitle">
+                Tools menghapus background gambar otomatis.
+            </p>
+        </div>
 
     </div>
 
@@ -709,7 +721,48 @@
             copyrightElement.textContent = `Copyright © ${currentYear} | Tewe Tech | Tri Wantoro`;
 
             // ====================================
-            // LOGIKA SIDEBAR BARU
+            // LOGIKA FADE-IN SAAT SCROLL (BARU)
+            // ====================================
+            // Mengambil semua elemen kartu yang akan dianimasikan
+            const cards = document.querySelectorAll('.cards-wrapper .container');
+            
+            // Opsi untuk Intersection Observer
+            const observerOptions = {
+                root: null, // Menggunakan viewport sebagai root
+                rootMargin: '0px',
+                threshold: 0.1 // Mengaktifkan ketika 10% elemen terlihat
+            };
+
+            // Callback function yang akan dijalankan oleh observer
+            const observerCallback = (entries, observer) => {
+                let delay = 0; // Menginisialisasi delay untuk efek staggered
+                
+                entries.forEach(entry => {
+                    // Cek jika elemen sedang terlihat di viewport
+                    if (entry.isIntersecting) {
+                        // Tambahkan kelas CSS yang memicu animasi
+                        entry.target.classList.add('fade-in-visible');
+                        
+                        // Menambahkan delay yang berurutan
+                        entry.target.style.animationDelay = `${delay}s`;
+                        delay += 0.1; // Menambah delay untuk kartu berikutnya
+
+                        // Hentikan pengamatan pada elemen setelah dianimasikan
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            // Membuat instance baru dari Intersection Observer
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            // Mengamati setiap elemen kartu
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+            
+            // ====================================
+            // LOGIKA SIDEBAR
             // ====================================
             const sidebar = document.getElementById('sidebar');
             const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
@@ -722,24 +775,18 @@
 
             // Fungsi untuk membuka dan menutup sidebar
             function toggleSidebar() {
-                // Periksa apakah sidebar saat ini aktif
                 const isActive = sidebar.classList.contains('active');
                 if (isActive) {
-                    // Jika aktif, tutup sidebar
                     sidebar.classList.remove('active');
                     sidebarOverlay.classList.remove('active');
-                    // Ganti ikon menjadi hamburger
                     toggleSidebarBtn.querySelector('i').classList.remove('fa-times');
                     toggleSidebarBtn.querySelector('i').classList.add('fa-bars');
-                    // Sembunyikan semua konten sidebar saat ditutup
                     allContentSections.forEach(section => {
                         section.classList.remove('active');
                     });
                 } else {
-                    // Jika tidak aktif, buka sidebar
                     sidebar.classList.add('active');
                     sidebarOverlay.classList.add('active');
-                    // Ganti ikon menjadi X
                     toggleSidebarBtn.querySelector('i').classList.remove('fa-bars');
                     toggleSidebarBtn.querySelector('i').classList.add('fa-times');
                 }
@@ -747,47 +794,36 @@
 
             // Fungsi untuk menampilkan konten spesifik di sidebar
             function showSidebarContent(contentElement) {
-                // Sembunyikan semua konten terlebih dahulu
                 allContentSections.forEach(section => {
                     section.classList.remove('active');
                 });
-                // Tampilkan konten yang diminta
                 contentElement.classList.add('active');
             }
 
-            // Event listener untuk tombol toggle
             toggleSidebarBtn.addEventListener('click', toggleSidebar);
-
-            // Event listener untuk menutup sidebar saat overlay diklik
             sidebarOverlay.addEventListener('click', toggleSidebar);
             
-            // Event listener untuk tautan About
             aboutLink.addEventListener('click', (e) => {
-                e.preventDefault(); // Mencegah default anchor link
+                e.preventDefault();
                 showSidebarContent(aboutContent);
             });
 
-            // Event listener untuk tautan Social Media
             socialMediaLink.addEventListener('click', (e) => {
-                e.preventDefault(); // Mencegah default anchor link
+                e.preventDefault();
                 showSidebarContent(socialMediaContent);
             });
 
             // Logika untuk gestur swipe (mendukung layar sentuh)
             let touchStartX = 0;
             let touchEndX = 0;
-            const minSwipeDistance = 50; // Jarak swipe minimum agar dianggap sebagai gestur
+            const minSwipeDistance = 50;
 
-            // Event saat sentuhan dimulai
             document.addEventListener('touchstart', (e) => {
                 touchStartX = e.touches[0].clientX;
             });
             
-            // Event saat sentuhan bergerak
             document.addEventListener('touchmove', (e) => {
-                // Mencegah scroll saat swipe horizontal
                 if (sidebar.classList.contains('active')) {
-                    // Hanya mencegah default jika swipe sedang aktif
                     const touchMoveX = e.touches[0].clientX;
                     if (Math.abs(touchMoveX - touchStartX) > 10) {
                         e.preventDefault();
@@ -795,17 +831,13 @@
                 }
             });
 
-            // Event saat sentuhan berakhir
             document.addEventListener('touchend', (e) => {
                 touchEndX = e.changedTouches[0].clientX;
                 const swipeDistance = touchStartX - touchEndX;
 
-                // Jika sidebar terbuka dan swipe ke kiri
                 if (sidebar.classList.contains('active') && swipeDistance > minSwipeDistance) {
                     toggleSidebar();
-                }
-                // Jika sidebar tertutup dan swipe ke kanan (dari sisi kanan layar)
-                else if (!sidebar.classList.contains('active') && touchStartX > (window.innerWidth - 50) && swipeDistance < -minSwipeDistance) {
+                } else if (!sidebar.classList.contains('active') && touchStartX > (window.innerWidth - 50) && swipeDistance < -minSwipeDistance) {
                     toggleSidebar();
                 }
             });
